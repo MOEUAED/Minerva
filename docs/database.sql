@@ -39,3 +39,80 @@ CREATE TABLE IF NOT EXISTS class_students (
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
+
+-- 6. CREATE TABLE FOR STOCK MESSAGES AND CHATS;
+CREATE TABLE IF NOT EXISTS chat_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT NOT NULL,
+    class_id INT NOT NULL,
+    message TEXT NOT NULL,
+    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (class_id) REFERENCES classes(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- 7. CREATE TABLE FOR WORKS;
+CREATE TABLE IF NOT EXISTS works (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    class_id INT NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    work ENUM('document','lecon','exercice') NOT NULL DEFAULT 'document',
+    file_path VARCHAR(255),
+    deadline DATETIME,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (class_id) REFERENCES classes(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- 8. CREATE WORK_ASSIGNMENTS;
+CREATE TABLE IF NOT EXISTS work_assignments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    work_id INT NOT NULL,
+    student_id INT NOT NULL,
+    assigned_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (work_id) REFERENCES works(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES users(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+);
+
+-- 9. CREATE TABLE ATTENDANCE;
+CREATE TABLE IF NOT EXISTS attendance (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT NOT NULL,
+    class_id INT NOT NULL,
+    date DATE NOT NULL,
+    status ENUM('present','absent') NOT NULL DEFAULT 'present',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id) REFERENCES users(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (class_id) REFERENCES classes(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- 10. CREATE TABLE SUBMISSIONS;
+CREATE TABLE IF NOT EXISTS submissions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    work_id INT NOT NULL,
+    student_id INT NOT NULL,
+    file_path VARCHAR(255),
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    grade INT DEFAULT NULL,
+    feedback TEXT DEFAULT NULL,
+    FOREIGN KEY (work_id) REFERENCES works(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES users(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
