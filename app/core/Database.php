@@ -10,20 +10,34 @@ class Database
         $config = require __DIR__ . '/../../config/database.php';
         $dbConfig = $config['db'];
 
-        $this->pdo = new PDO(
-            $dbConfig['dsn'],
-            $dbConfig['user'],
-            $dbConfig['pass'],
-            $dbConfig['options']
-        );
+        try {
+            $this->pdo = new PDO(
+                $dbConfig['dsn'],
+                $dbConfig['user'],
+                $dbConfig['pass'],
+                $dbConfig['options']
+            );
+        } catch (PDOException $e) {
+            echo 'connection faild' . $e->getMessage();
+        }
+
     }
 
-    public function connect()
+    public static function getInstance()
     {
-        if (is_null(self::$instance)) {
+        if (self::$instance === null) {
             self::$instance = new Database();
         }
 
         return self::$instance;
     }
+    public function getConnection(): PDO
+    {
+        return $this->pdo;
+    }
 }
+
+$v = Database::getInstance();
+$s = $v->getInstance();
+echo "<pre>";
+var_dump($v === $s);
