@@ -107,7 +107,6 @@ CREATE TABLE IF NOT EXISTS submissions (
     student_id INT NOT NULL,
     file_path VARCHAR(255),
     submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    grade INT DEFAULT NULL,
     feedback TEXT DEFAULT NULL,
     FOREIGN KEY (work_id) REFERENCES works(id)
         ON DELETE CASCADE
@@ -115,4 +114,16 @@ CREATE TABLE IF NOT EXISTS submissions (
     FOREIGN KEY (student_id) REFERENCES users(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
+);  
+
+-- 11. CREATE TABLE GRADE;
+CREATE TABLE IF NOT EXISTS grades (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    submission_id INT NOT NULL UNIQUE,
+    grade DECIMAL(5, 2) NOT NULL,
+    comment TEXT,
+    graded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (submission_id) REFERENCES submissions(id),
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
