@@ -86,7 +86,7 @@
                             <option value="2">Classe B - Design</option>
                         </select>
                     </div>
-                    <button class="w-full bg-slate-800 text-white font-bold py-3 rounded-xl hover:bg-slate-700 transition-all">
+                    <button class="w-full bg-slate-800 text-white font-bold py-3 rounded-xl hover:bg-slate-700 transition-all" href="/dashboard/create">
                         Créer le compte étudiant
                     </button>
                 </form>
