@@ -1,7 +1,7 @@
 <?php
 return [
     'db' => [
-        'dsn' => 'mysql:host=127.0.0.1;dbname=mineva;charset=utf8mb4',
+        'dsn' => 'mysql:host=localhost;dbname=mineva;charset=utf8mb4',
         'user' => 'root',
         'pass' => 'amine@2002@N',
         'options' => [

@@ -58,7 +58,6 @@
 
         <button type="submit">Se connecter</button>
     </form>
-
 </body>
 
 </html>
