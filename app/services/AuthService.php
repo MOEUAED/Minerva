@@ -24,12 +24,18 @@ class AuthService
     public function register($nom,$email,$password)
     {
         $user = $this->userModel->findByEmail($email);
-        if ($user===true){
+        if ($user){
             return "Un compte existe déjà avec cet email";
             exit;
         }
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $user = $this->userModel->create($nom,$email,$hashedPassword);
+        $result = $this->userModel->create($nom,$email,$hashedPassword);
+
+        if ($result) {
+            return true ;
+        }else {
+            return "Erreur lors de l'inscription";
+        }
     }
 
     public function logout()
