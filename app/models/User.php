@@ -18,7 +18,7 @@ class UserModel
     }
     public function create($nom,$email,$password)
     {
-        $stmt = $this->db->prepare("INSERT INTO users (email, password, nom) VALUES (?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO users (email, password, fullname) VALUES (?, ?, ?)");
         $stmt->execute([$email, $password, $nom]);
         return true;
     }
