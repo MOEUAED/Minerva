@@ -2,8 +2,7 @@
 
 class Router
 {
-    public $routes = [
-    ];
+    public $routes = [];
 
     public function get($path, $action)
     {

@@ -18,9 +18,11 @@ class AuthController
 
             if ($result === true) {
                 if ($_SESSION['userRole'] === 'teacher') {
-                    header('Location: /student/dashbord');
+                    // header('Location: /teachear/dashbord');
+                    require_once __DIR__ . '/../../views/teacher/dashboard.php';
                 } else {
-                    header('Location: /student/dashbord');
+                    // header('Location: /student/dashbord');
+                    require_once __DIR__ . '/../../views/student/dashboard.php';
                 }
             } else {
                 $error = $result;
