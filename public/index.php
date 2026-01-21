@@ -13,5 +13,8 @@ $route->get('/student/dashboard', ['StudentController', 'dashboard']);
 
 $route->get('/register', ['AuthController', 'register']);
 $route->post('/register', ['AuthController', 'register']);
+$route->get('/logout',['AuthController', 'logout']);
+
+$route->post('/teacher/create-student', ['TeacherController', 'storeStudent']);
 
 $route->dispatch();
