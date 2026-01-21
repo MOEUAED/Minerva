@@ -1,64 +1,59 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="fr">
 <head>
-    <title>Minerva - Login</title>
-    <style>
-        body {
-            font-family: Arial;
-            max-width: 400px;
-            margin: 50px auto;
-        }
-
-        .form-group {
-            margin: 15px 0;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-        }
-
-        button {
-            background: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-        .error { 
-        color: red; 
-        background: #ffe6e6; 
-        padding: 10px; 
-        margin: 10px 0; 
-        border: 1px solid red; 
-        border-radius: 4px;
-    }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Connexion | Minerva</title>
 </head>
+<body class="bg-slate-50 flex items-center justify-center min-h-screen p-4">
 
-<body>
-    <h2>Connexion - Minerva</h2>
-    <?php if (isset($error)): ?>
-        <div class="error">
-            <?= htmlspecialchars($error) ?>
-        </div>
-    <?php endif; ?>
-    <form method="POST" action="/login">
-        <div class="form-group">
-            <label>Email:</label>
-            <input type="email" name="email" required>
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-100">
+        
+        <div class="text-center mb-10">
+            <div class="bg-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-200">
+                <span class="text-white text-3xl font-bold italic">M</span>
+            </div>
+            <h1 class="text-2xl font-bold text-slate-800 tracking-tight">Minerva</h1>
+            <p class="text-slate-500 mt-2">Veuillez vous identifier pour continuer</p>
         </div>
 
-        <div class="form-group">
-            <label>Mot de passe:</label>
-            <input type="password" name="password" required>
-        </div>
+        <?php if (isset($error)): ?>
+            <div class="mb-6 flex items-center bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl">
+                <svg class="h-5 w-5 text-red-500 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p class="text-sm text-red-700 font-medium"><?= htmlspecialchars($error) ?></p>
+            </div>
+        <?php endif; ?>
 
-        <button type="submit">Se connecter</button>
-    </form>
+        <form method="POST" action="/login" class="space-y-6">
+            <div>
+                <label class="block text-sm font-semibold text-slate-700 mb-1">Adresse Email</label>
+                <input type="email" name="email" required 
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder-slate-400"
+                    placeholder="nom@ecole.com">
+            </div>
 
+            <div>
+                <div class="flex justify-between mb-1">
+                    <label class="block text-sm font-semibold text-slate-700">Mot de passe</label>
+                    <a href="#" class="text-xs text-blue-600 hover:text-blue-800 transition-colors">Oublié ?</a>
+                </div>
+                <input type="password" name="password" required 
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder-slate-400"
+                    placeholder="••••••••">
+            </div>
+
+            <button type="submit" 
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-100 transition-all transform active:scale-[0.98]">
+                Se connecter
+            </button>
+        </form>
+
+        <p class="mt-8 text-center text-sm text-slate-400">
+            &copy; 2026 Minerva Edu. Tous droits réservés.
+        </p>
+    </div>
 </body>
-
-</html>
+</html> 
