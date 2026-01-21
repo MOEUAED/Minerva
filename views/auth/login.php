@@ -50,6 +50,12 @@
                 Se connecter
             </button>
         </form>
+        <div class="mt-8 text-center">
+            <p class="text-sm text-slate-500">
+                Vous n'avez pas de compte ? 
+                <a href="/register" class="text-blue-600 font-bold hover:underline transition-all">Enregistrer</a>
+            </p>
+        </div>
 
         <p class="mt-8 text-center text-sm text-slate-400">
             &copy; 2026 Minerva Edu. Tous droits réservés.

@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     fullname VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('teacher', 'student') NOT NULL DEFAULT 'student',
+    role ENUM('teacher', 'student') NOT NULL DEFAULT 'teacher',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 -- 4. CREATE TABLE FOR STOCK CLASSES ;
