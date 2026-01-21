@@ -18,14 +18,22 @@ class TeacherController
     }
     public function storeStudent()
     {
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $fullName = $_POST['fullname'];
+            $fullname = $_POST['fullname'];
             $email = $_POST['email'];
-            $result = $this->createStudent->createStudent($fullName, $email);
-
-
+            $result = $this->createStudent->createStudent($fullname, $email);
+            if ($result['status'] === ['success']) {
+                $_SESSION['success_message'] = $result['message'];
+                $_SESSION['student_info'] = [
+                    'email' => $result['email'],
+                    'password' => $result['password']
+                ];
+                header('Location: /teacher/dashboard');
+                exit();
+            } else {
+                $erreur = $result['message'];
+            }
         }
-
+        require_once __DIR__ . '/../../views/teacher/dashboard.php';
     }
 }

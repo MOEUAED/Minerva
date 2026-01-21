@@ -17,4 +17,10 @@ class StudentModel
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$fullname, $email, $password, $role]);
     }
+     public function findByEmail($email)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
+        $stmt->execute([$email]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
