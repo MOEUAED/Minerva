@@ -11,7 +11,7 @@ class AuthService
     public function login($email, $password)
     {
         $user = $this->userModel->findByEmail($email);
-        if ($user===false) {
+        if ($user === false) {
             return "Cet email n'existe pas";
         }
         if (!password_verify($password, $user['password'])) {
@@ -20,6 +20,16 @@ class AuthService
         $_SESSION['userId'] = $user['id'];
         $_SESSION['userRole'] = $user['role'];
         return true;
+    }
+    public function register($nom,$email,$password)
+    {
+        $user = $this->userModel->findByEmail($email);
+        if ($user===true){
+            return "Un compte existe déjà avec cet email";
+            exit;
+        }
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $user = $this->userModel->create($nom,$email,$hashedPassword);
     }
 
     public function logout()
