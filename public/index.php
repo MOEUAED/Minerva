@@ -11,5 +11,7 @@ $route->post('/login', ['AuthController', 'login']);
 $route->get('/teacher/dashboard', ['TeacherController', 'dashboard']);
 $route->get('/student/dashboard', ['StudentController', 'dashboard']);
 
+$route->get('/register', ['AuthController', 'register']);
+$route->post('/register', ['AuthController', 'register']);
 
 $route->dispatch();

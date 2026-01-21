@@ -18,11 +18,12 @@ class AuthController
 
             if ($result === true) {
                 if ($_SESSION['userRole'] === 'teacher') {
-                    // header('Location: /teachear/dashbord');
-                    require_once __DIR__ . '/../../views/teacher/dashboard.php';
+                    header('Location: /teacher/dashboard');
+                    exit;
                 } else {
-                    // header('Location: /student/dashbord');
-                    require_once __DIR__ . '/../../views/student/dashboard.php';
+                    header('Location: /student/dashboard');
+                    exit;
+                    
                 }
             } else {
                 $error = $result;
@@ -32,6 +33,28 @@ class AuthController
         } else {
             require_once __DIR__ . '/../../views/auth/login.php';
         }
+    }
+    public function register()
+    {
+
+        $result = null;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $fullname = $_POST['name'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            $result = $this->service->register($fullname, $email, $password);
+            if ($result === true) {
+                header('Location: /login');
+                exit;
+            } else {
+                $error = $result;
+                require_once __DIR__ . '/../../views/auth/register.php';
+            }
+        } else {
+            require_once __DIR__ . '/../../views/auth/register.php';
+        }
+
     }
     public function logout()
     {

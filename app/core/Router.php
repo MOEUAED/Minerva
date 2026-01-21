@@ -18,6 +18,9 @@ class Router
     {
         $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $methode = $_SERVER['REQUEST_METHOD'];
+        // echo "Path: $path<br>";
+        // echo "Method: $methode<br>";
+        // var_dump($this->routes);
 
         if (isset($this->routes[$methode][$path])) {
             $action = $this->routes[$methode][$path];
@@ -30,7 +33,7 @@ class Router
                 $controllerInstance = new $controller();
                 $controllerInstance->$methodName();
             } else {
-                require_once __DIR__.'/views/'.$action.'.php';
+                require_once __DIR__ . '/views/' . $action . '.php';
             }
         } else {
             http_response_code(404);
