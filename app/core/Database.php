@@ -37,7 +37,4 @@ class Database
     }
 }
 
-$v = Database::getInstance();
-$s = $v->getInstance();
-echo "<pre>";
-var_dump($v === $s);
+
