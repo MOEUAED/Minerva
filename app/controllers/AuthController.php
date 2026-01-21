@@ -39,7 +39,7 @@ class AuthController
 
         $result = null;
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $fullname = $_POST['name'];
+            $fullname = $_POST['fullname'];
             $email = $_POST['email'];
             $password = $_POST['password'];
 
