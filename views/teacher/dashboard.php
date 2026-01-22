@@ -56,7 +56,7 @@
     <main class="flex-1 overflow-y-auto p-8">
         <header class="flex justify-between items-center mb-10">
             <div>
-                <h2 class="text-3xl font-bold text-slate-800">Bonjour, <?= $_SESSION['userNom'] ?></h2>
+                <h2 class="text-3xl font-bold text-slate-800">Bonjour, <?= $_SESSION['username'] ?? 'Non défini' ?></h2>
                 <p class="text-slate-500">Voici ce qui se passe dans vos classes aujourd'hui.</p>
             </div>
             <div class="flex space-x-4">
@@ -126,10 +126,16 @@
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-1">Classe</label>
                         <select name="class_id"
-                            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none bg-white">
-                            <option>Sélectionner une classe</option>
-                            <option value="1">Classe A - Web Dev</option>
-                            <option value="2">Classe B - Design</option>
+                            class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+                            required>
+
+                            <option value="">Sélectionner une classe</option>
+
+                            <?php foreach ($classes as $class): ?>
+                                <option value="<?= $class['id'] ?>">
+                                    <?= htmlspecialchars($class['name']) ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <button
@@ -139,45 +145,74 @@
                 </form>
             </section>
 
-            <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xl font-bold text-slate-800">Mes Classes</h3>
-                    <a href="#" class="text-blue-600 text-sm font-bold hover:underline">Voir tout</a>
-                </div>
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
-                        <div class="flex items-center space-x-4">
-                            <div class="bg-blue-100 text-blue-600 p-3 rounded-lg font-bold text-xs">WD</div>
-                            <div>
-                                <h4 class="font-bold text-slate-800 text-sm">Web Development</h4>
-                                <p class="text-xs text-slate-500 font-medium">24 Étudiants</p>
+            <?php if (!empty($classes)): ?>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <?php foreach ($classes as $class): ?>
+                        <a href="/teacher/works?class_id=<?= $class['id'] ?>"
+                            class="group bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 flex justify-between items-center cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <!-- Icon -->
+                                <div
+                                    class="h-12 w-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white font-bold text-sm shadow">
+                                    <?= strtoupper(substr($class['name'], 0, 2)); ?>
+                                </div>
+                                <!-- Info -->
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-base group-hover:text-blue-600 transition">
+                                        <?= htmlspecialchars($class['name']) ?>
+                                    </h4>
+                                    <p class="text-xs text-slate-500">
+                                        Voir les travaux
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <button class="text-slate-400 hover:text-blue-600">
-                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
+                            <!-- Arrow -->
+                            <div class="text-slate-400 group-hover:text-blue-600 transition">
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </a>
+                    <?php endforeach; ?>
                 </div>
-            </section>
-
+            <?php else: ?>
+                <div class="text-center py-10">
+                    <p class="text-slate-500 text-sm">
+                        Vous n'avez pas encore de classes 
+                    </p>
+                </div>
+            <?php endif; ?>
         </div>
     </main>
 
     <div id="classModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl p-8 max-w-sm w-full">
+        <form action="/teacher/create-classes" method="POST"
+            class="bg-white rounded-2xl p-8 max-w-sm w-full">
+
             <h3 class="text-xl font-bold mb-4">Créer une classe</h3>
-            <input type="text" placeholder="Nom de la classe (ex: Terminale A)"
+
+            <input
+                type="text"
+                name="class_name"
+                required
+                placeholder="Nom de la classe (ex: Terminale A)"
                 class="w-full px-4 py-2.5 rounded-xl border mb-4 outline-none focus:ring-2 focus:ring-blue-500">
+
             <div class="flex space-x-3">
-                <button onclick="closeModal('classModal')"
-                    class="flex-1 py-2 bg-slate-100 rounded-xl font-bold">Annuler</button>
-                <button
-                    class="flex-1 py-2 bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-200">Créer</button>
+                <button type="button"
+                        onclick="closeModal('classModal')"
+                        class="flex-1 py-2 bg-slate-100 rounded-xl font-bold">
+                    Annuler
+                </button>
+
+                <button type="submit"
+                        class="flex-1 py-2 bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-200">
+                    Créer
+                </button>
             </div>
-        </div>
+        </form>
     </div>
 
     <script>
