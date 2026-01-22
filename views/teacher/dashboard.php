@@ -56,7 +56,7 @@
     <main class="flex-1 overflow-y-auto p-8">
         <header class="flex justify-between items-center mb-10">
             <div>
-                <h2 class="text-3xl font-bold text-slate-800">Bonjour,<?= $_SESSION['fullname'] ?? 'Non défini' ?></h2>
+                <h2 class="text-3xl font-bold text-slate-800">Bonjour, <?= $_SESSION['userNom'] ?></h2>
                 <p class="text-slate-500">Voici ce qui se passe dans vos classes aujourd'hui.</p>
             </div>
             <div class="flex space-x-4">
@@ -86,6 +86,32 @@
 
             <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <h3 class="text-xl font-bold text-slate-800 mb-6">Inscrire un étudiant</h3>
+                
+                <!-- Messages de succès -->
+                <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-xl mb-4">
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <?= htmlspecialchars($_SESSION['success_message']) ?>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['success_message']); ?>
+                <?php endif; ?>
+
+                <!-- Messages d'erreur -->
+                <?php if (isset($_SESSION['error_message'])): ?>
+                    <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-xl mb-4">
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 text-red-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                            <?= htmlspecialchars($_SESSION['error_message']) ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                
                 <form action="/teacher/addStudent" method="POST" class="space-y-4">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-1">Nom Complet</label>
@@ -106,17 +132,6 @@
                             <option value="2">Classe B - Design</option>
                         </select>
                     </div>
-                    <?php if (isset($error)): ?>
-                        <div class="error">
-                            <?= htmlspecialchars($error) ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if (isset($success)): ?>
-                        <div class="success">
-                            <?= htmlspecialchars($success) ?>
-                        </div>
-                    <?php endif; ?>
                     <button
                         class="w-full bg-slate-800 text-white font-bold py-3 rounded-xl hover:bg-slate-700 transition-all">
                         Créer le compte étudiant

@@ -17,6 +17,7 @@ class AuthService
         if (!password_verify($password, $user['password'])) {
             return "Mot de passe incorrect";
         }
+        $_SESSION['userNom'] = $user['nom'];
         $_SESSION['userId'] = $user['id'];
         $_SESSION['userRole'] = $user['role'];
         return true;
@@ -28,8 +29,8 @@ class AuthService
             return "Un compte existe déjà avec cet email";
             exit;
         }
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $result = $this->userModel->create($nom,$email,$hashedPassword);
+        // $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $result = $this->userModel->create($nom,$email,$password);
 
         if ($result) {
             return true ;
