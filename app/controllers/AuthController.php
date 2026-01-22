@@ -16,7 +16,7 @@ class AuthController
             $password_input = $_POST['password'];
             $result = $this->service->login($email_input, $password_input);
 
-            if ($result === true) {
+            if ($result) {
                 if ($_SESSION['userRole'] === 'teacher') {
                     header('Location: /teacher/dashboard');
                     exit;
