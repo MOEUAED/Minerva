@@ -17,24 +17,27 @@ class AuthService
         if (!password_verify($password, $user['password'])) {
             return "Mot de passe incorrect";
         }
-        $_SESSION['userNom'] = $user['nom'];
+        // 
+        $_SESSION['userNom'] = $user['fullname'];
+        $_SESSION['userEmail'] = $user['email'];
         $_SESSION['userId'] = $user['id'];
         $_SESSION['userRole'] = $user['role'];
+
         return true;
     }
-    public function register($nom,$email,$password)
+    public function register($nom, $email, $password)
     {
         $user = $this->userModel->findByEmail($email);
-        if ($user){
+        if ($user) {
             return "Un compte existe déjà avec cet email";
-            exit;
+            return;
         }
-        // $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $result = $this->userModel->create($nom,$email,$password);
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        $result = $this->userModel->create($nom, $email, $hashedPassword);
 
         if ($result) {
-            return true ;
-        }else {
+            return true;
+        } else {
             return "Erreur lors de l'inscription";
         }
     }
@@ -45,7 +48,7 @@ class AuthService
         session_unset();
         session_destroy();
         header('Location: /login');
-        exit;
+        return;
 
     }
 

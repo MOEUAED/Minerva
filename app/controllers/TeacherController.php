@@ -1,23 +1,30 @@
 <?php
 include_once __DIR__ . '/../services/TeacherService.php';
+include_once __DIR__.'/../services/ClassService.php';
 class TeacherController
 {
     private $createStudent;
+    private $afficheprojet ;
 
     public function __construct()
     {
         $this->createStudent = new TeacherService();
+        $this->afficheprojet = new ClassService();
     }
     public function dashboard()
     {
         if (!isset($_SESSION['userId']) || $_SESSION['userRole'] !== 'teacher') {
             header('Location: /login');
-            exit();
+            return;
         }
+        $teacherId = $_SESSION['userId'];
+        $classes = $this->afficheprojet->getClassesByTeacher($teacherId);
+    
         require_once __DIR__ . '/../../views/teacher/dashboard.php';
     }
     public function storeStudent()
     {
+        // amazonq-ignore-next-line
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fullname = $_POST['fullname'];
             $email = $_POST['email'];

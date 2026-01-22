@@ -19,10 +19,10 @@ class AuthController
             if ($result) {
                 if ($_SESSION['userRole'] === 'teacher') {
                     header('Location: /teacher/dashboard');
-                    exit;
+                    exit();
                 } else {
                     header('Location: /student/dashboard');
-                    exit;
+                    exit();
                     
                 }
             } else {
@@ -46,7 +46,7 @@ class AuthController
             $result = $this->service->register($fullname, $email, $password);
             if ($result === true) {
                 header('Location: /login');
-                exit;
+                return;
             } else {
                 $error = $result;
                 require_once __DIR__ . '/../../views/auth/register.php';
