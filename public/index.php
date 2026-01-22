@@ -16,6 +16,6 @@ $route->post('/register', ['AuthController', 'register']);
 $route->get('/logout',['AuthController', 'logout']);
 
 $route->post('/teacher/addStudent', ['TeacherController', 'storeStudent']);
-
+$route->post('/teacher/create-classes', ['ClassController', 'store']);
 
 $route->dispatch();
