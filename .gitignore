@@ -1,6 +1,6 @@
-/config/database.php
-/vendor
-.env
-minerva.session.sql
-.gitignore
+config/database.php
+config/.env
+vendor/
+*.session.sql
+
 
