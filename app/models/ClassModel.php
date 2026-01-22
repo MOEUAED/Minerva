@@ -20,7 +20,7 @@ class ClassModel
 
     public function getByTeacher($teacherId)
     {
-        $sql = "SELECT * FROM classes WHERE teacher_id = ?";
+        $sql = "SELECT * FROM classes WHERE teacher_id = ? LIMIT 8";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$teacherId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

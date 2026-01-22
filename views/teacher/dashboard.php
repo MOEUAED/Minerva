@@ -56,7 +56,8 @@
     <main class="flex-1 overflow-y-auto p-8">
         <header class="flex justify-between items-center mb-10">
             <div>
-                <h2 class="text-3xl font-bold text-slate-800">Bonjour, <?= $_SESSION['username'] ?? 'Non défini' ?></h2>
+                <h2 class="text-3xl font-bold text-slate-800">Bonjour, <?= $_SESSION['userNom'] ?>
+                </h2>
                 <p class="text-slate-500">Voici ce qui se passe dans vos classes aujourd'hui.</p>
             </div>
             <div class="flex space-x-4">
@@ -86,13 +87,13 @@
 
             <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                 <h3 class="text-xl font-bold text-slate-800 mb-6">Inscrire un étudiant</h3>
-                
+
                 <!-- Messages de succès -->
                 <?php if (isset($_SESSION['success_message'])): ?>
                     <div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-xl mb-4">
                         <div class="flex items-center">
                             <svg class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                             </svg>
                             <?= htmlspecialchars($_SESSION['success_message']) ?>
                         </div>
@@ -105,13 +106,14 @@
                     <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-xl mb-4">
                         <div class="flex items-center">
                             <svg class="h-5 w-5 text-red-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
                             </svg>
                             <?= htmlspecialchars($_SESSION['error_message']) ?>
                         </div>
                     </div>
                 <?php endif; ?>
-                
+
                 <form action="/teacher/addStudent" method="POST" class="space-y-4">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-1">Nom Complet</label>
@@ -168,10 +170,8 @@
                             </div>
                             <!-- Arrow -->
                             <div class="text-slate-400 group-hover:text-blue-600 transition">
-                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M9 5l7 7-7 7" />
+                                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
                             </div>
                         </a>
@@ -180,7 +180,7 @@
             <?php else: ?>
                 <div class="text-center py-10">
                     <p class="text-slate-500 text-sm">
-                        Vous n'avez pas encore de classes 
+                        Vous n'avez pas encore de classes
                     </p>
                 </div>
             <?php endif; ?>
@@ -188,27 +188,21 @@
     </main>
 
     <div id="classModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4">
-        <form action="/teacher/create-classes" method="POST"
-            class="bg-white rounded-2xl p-8 max-w-sm w-full">
+        <form action="/teacher/create-classes" method="POST" class="bg-white rounded-2xl p-8 max-w-sm w-full">
 
             <h3 class="text-xl font-bold mb-4">Créer une classe</h3>
 
-            <input
-                type="text"
-                name="class_name"
-                required
-                placeholder="Nom de la classe (ex: Terminale A)"
+            <input type="text" name="class_name" required placeholder="Nom de la classe (ex: Terminale A)"
                 class="w-full px-4 py-2.5 rounded-xl border mb-4 outline-none focus:ring-2 focus:ring-blue-500">
 
             <div class="flex space-x-3">
-                <button type="button"
-                        onclick="closeModal('classModal')"
-                        class="flex-1 py-2 bg-slate-100 rounded-xl font-bold">
+                <button type="button" onclick="closeModal('classModal')"
+                    class="flex-1 py-2 bg-slate-100 rounded-xl font-bold">
                     Annuler
                 </button>
 
                 <button type="submit"
-                        class="flex-1 py-2 bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-200">
+                    class="flex-1 py-2 bg-blue-600 text-white rounded-xl font-bold shadow-lg shadow-blue-200">
                     Créer
                 </button>
             </div>

@@ -14,7 +14,7 @@ class ClassController
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             header('Location: /teacher/dashboard');
-            exit();
+            return;
         }
 
         session_start();
@@ -25,7 +25,7 @@ class ClassController
         $this->classService->create($name, $teacherId);
 
         header('Location: /teacher/dashboard');
-        exit();
+        return;
     }
     
     
