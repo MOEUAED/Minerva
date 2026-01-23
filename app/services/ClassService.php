@@ -19,9 +19,12 @@ class ClassService
         return $this->classModel->insert($name, $teacherId);
     }
     public function getClassesByTeacher($teacherId)
-{
+    {
     return $this->classModel->getByTeacher($teacherId);
-}
-
+    }
+    public function getClassesByTeacherId($teacherId)
+    {
+    return $this->classModel->getByTeacherId($teacherId);
+    }
 
 }
