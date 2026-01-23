@@ -19,7 +19,7 @@ class ClassController
 
         session_start();
 
-        $name = $_POST['class_name'] ?? '';
+        $name = $_POST['class_name'];
         $teacherId = $_SESSION['userId'];
 
         $this->classService->create($name, $teacherId);
