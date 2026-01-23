@@ -31,12 +31,11 @@ class WorkService
     }
     public function getWorksByTeacher($teacherId)
     {
-        
+
         // if ($_SESSION['role'] != 'teacher') {
         //     header('location: /login');
         // }
-        $affiche = $this->work->getWorkByTeacher($teacherId);
-        return $affiche;
+        return $this->work->getWorkByTeacher($teacherId);
     }
 
 
