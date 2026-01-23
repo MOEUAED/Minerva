@@ -18,7 +18,7 @@ class WorkController
             header('Location: /login');
             return;
         }
-        $works = $this->workService->getWorksByTeacher($_SESSION['userId']);
+        // $works = $this->workService->getWorksByTeacher(teacherId: $_SESSION['userId']);
         $works = $this->workService->getWorksByTeacher($_SESSION['userId']);
         $classes = $this->classService->getClassesByTeacher($_SESSION['userId']);
         require_once __DIR__ . '/../../views/teacher/create_work.php';
