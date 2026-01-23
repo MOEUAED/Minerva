@@ -27,6 +27,14 @@ class ClassController
         header('Location: /teacher/dashboard');
         return;
     }
+
+    public function storeviews()
+    {
+        $teacherId = $_SESSION['userId'];
+        $classes = $this->classService->getClassesByTeacherId($teacherId);
+
+        require __DIR__ . '/../../views/teacher/classes.php';
+    }
     
     
 }
