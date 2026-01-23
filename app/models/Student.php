@@ -32,4 +32,10 @@ class StudentModel
         $stmt->execute([$email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function findAll()
+    {
+        $stmt = $this->db->query("SELECT * FROM users WHERE role = 'student'");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
