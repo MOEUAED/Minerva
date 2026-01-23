@@ -56,6 +56,7 @@ class TeacherService
                     'password' => $password,
                     'envoye' => $emailSent
                 ];
+                
             }
         }
 
@@ -67,6 +68,7 @@ class TeacherService
 
     public function sendEmail($email, $password)
     {
+        
         $ENV = require_once __DIR__ . '/../../config/email.php';
         $mail = new PHPMailer(true);
         try {
@@ -84,73 +86,102 @@ class TeacherService
             $mail->isHTML(true);
 
             $mail->Body = "
-<div style='font-family: Arial, Helvetica, sans-serif; background:#f4f6f9; padding:40px 0;'>
+<div style='margin:0;padding:0;background:#f3f4f6;font-family:Arial,Helvetica,sans-serif;'>
 
-    <table width='100%' cellpadding='0' cellspacing='0'>
-        <tr>
-            <td align='center'>
+  <table width='100%' cellpadding='0' cellspacing='0'>
+    <tr>
+      <td align='center' style='padding:40px 15px;'>
 
-                <table width='600' cellpadding='0' cellspacing='0' 
-                       style='background:#ffffff; border-radius:12px; padding:40px; box-shadow:0 5px 20px rgba(0,0,0,0.08);'>
+        <!-- Card -->
+        <table width='600' cellpadding='0' cellspacing='0'
+               style='max-width:600px;background:#ffffff;border-radius:14px;
+                      box-shadow:0 10px 30px rgba(0,0,0,0.08);padding:40px;'>
 
-                    <tr>
-                        <td align='center'>
+          <!-- Header -->
+          <tr>
+            <td align='center' style='padding-bottom:25px;'>
 
-                            <h1 style='color:#2563eb; margin-bottom:10px;'>
-                                🎓 Minerva
-                            </h1>
+              <h1 style='margin:0;color:#2563eb;font-size:28px;font-weight:bold;'>
+                🎓 Minerva
+              </h1>
 
-                            <h2 style='color:#222; margin-top:0;'>
-                                Bienvenue sur la plateforme !
-                            </h2>
-
-                            <p style='color:#555; font-size:15px;'>
-                                Votre compte a été créé avec succès.<br>
-                                Voici vos informations de connexion :
-                            </p>
-
-                            <div style='background:#f1f5f9; padding:20px; border-radius:8px; margin:25px 0; text-align:left;'>
-
-                                <p style='margin:8px 0;'>
-                                    <strong>Email :</strong> $email
-                                </p>
-
-                                <p style='margin:8px 0;'>
-                                    <strong>Mot de passe :</strong> $password
-                                </p>
-
-                            </div>
-
-                            <a href='http://localhost/minerva/login'
-                               style='display:inline-block;
-                                      background:#2563eb;
-                                      color:#ffffff;
-                                      padding:12px 28px;
-                                      border-radius:8px;
-                                      text-decoration:none;
-                                      font-weight:bold;
-                                      margin-top:10px;'>
-                                Se connecter
-                            </a>
-
-                            <p style='margin-top:30px; font-size:12px; color:#888;'>
-                                Si vous n'avez pas créé ce compte, ignorez cet email.
-                            </p>
-
-                            <hr style='margin:25px 0; border:none; border-top:1px solid #eee;'>
-
-                            <p style='font-size:12px; color:#aaa;'>
-                                © 2026 Minerva • Classroom Management System
-                            </p>
-
-                        </td>
-                    </tr>
-
-                </table>
+              <p style='margin:6px 0 0 0;color:#6b7280;font-size:14px;'>
+                Classroom Management Platform
+              </p>
 
             </td>
-        </tr>
-    </table>
+          </tr>
+
+          <!-- Title -->
+          <tr>
+            <td align='center'>
+              <h2 style='margin:0 0 15px 0;color:#111827;font-size:22px;'>
+                Bienvenue sur Minerva !
+              </h2>
+            </td>
+          </tr>
+
+          <!-- Text -->
+          <tr>
+            <td align='center' style='color:#4b5563;font-size:15px;line-height:22px;padding-bottom:25px;'>
+              Votre compte a été créé avec succès.<br>
+              Utilisez les informations ci-dessous pour accéder à votre espace.
+            </td>
+          </tr>
+
+          <!-- Credentials Box -->
+          <tr>
+            <td>
+
+              <table width='100%' style='background:#f9fafb;border-radius:10px;padding:18px;'>
+                <tr>
+                  <td style='color:#374151;font-size:14px;padding:6px 0;'>
+                    <strong>Email :</strong> $email
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style='color:#374151;font-size:14px;padding:6px 0;'>
+                    <strong>Mot de passe :</strong> $password
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Button -->
+          <tr>
+            <td align='center' style='padding:30px 0 10px 0;'>
+
+              <a href='https://maghreb.simplonline.co/login?redirect=%2Fclassrooms%2Ffae303b1-faa2-4fde-bec5-1f03d350564e%2Fbriefs%2Fea9c252f-2de6-4f60-b410-c8f8363d9c41'
+                 style='background:#2563eb;
+                        color:#ffffff;
+                        text-decoration:none;
+                        padding:14px 32px;
+                        font-weight:bold;
+                        border-radius:10px;
+                        display:inline-block;
+                        font-size:15px;'>
+
+                Se connecter
+              </a>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align='center' style='padding-top:30px;font-size:12px;color:#9ca3af;'>
+              © 2026 Minerva • Education Management System
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
 
 </div>
 ";

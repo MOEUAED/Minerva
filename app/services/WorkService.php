@@ -17,9 +17,27 @@ class WorkService
                 'message' => 'Tous les champs son oblligatoire.'
             ];
         }
+        if ($_SESSION['userRole'] != 'teacher') {
+            return $resultat = [
+                'success' => false,
+                'message' => 'ne peux pas.'
+            ];
+            header('Location: /login');
+            exit;
+
+        }
         $this->work->save($name, $description, $deadline, $idClass);
         return $resultat;
     }
+    public function getWorksByTeacher($teacherId)
+    {
+        
+        // if ($_SESSION['role'] != 'teacher') {
+        //     header('location: /login');
+        // }
+        $affiche = $this->work->getWorkByTeacher($teacherId);
+        return $affiche;
+    }
 
-    
+
 }
