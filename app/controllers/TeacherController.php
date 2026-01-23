@@ -19,12 +19,12 @@ class TeacherController
         }
         $teacherId = $_SESSION['userId'];
         $classes = $this->afficheprojet->getClassesByTeacher($teacherId);
+        //  $classes['id']=$_SESSION['classeId'] ;
     
         require_once __DIR__ . '/../../views/teacher/dashboard.php';
     }
     public function storeStudent()
     {
-        // amazonq-ignore-next-line
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fullname = $_POST['fullname'];
             $email = $_POST['email'];

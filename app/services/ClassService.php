@@ -15,7 +15,7 @@ class ClassService
         if (empty($name)) {
             return false;
         }
-
+        $_SESSION[''];
         return $this->classModel->insert($name, $teacherId);
     }
     public function getClassesByTeacher($teacherId)
