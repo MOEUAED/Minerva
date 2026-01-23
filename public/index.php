@@ -17,6 +17,7 @@ $route->get('/logout',['AuthController', 'logout']);
 
 $route->post('/teacher/addStudent', ['TeacherController', 'storeStudent']);
 $route->post('/teacher/create-classes', ['ClassController', 'store']);
+$route->get('/teacher/classes', ['ClassController', 'storeviews']);
 
 $route->get('/teacher/works',['WorkController', 'works']);
 $route->post('/teacher/works', ['TeacherController', 'workCreate']);

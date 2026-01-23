@@ -41,6 +41,14 @@
                 </svg>
                 <span>Travaux</span>
             </a>
+            <a href="/teacher/students"
+                class="flex items-center space-x-3 hover:bg-slate-800 p-3 rounded-xl transition-all">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Absence</span>
+            </a>
         </nav>
         <div class="p-4 border-t border-slate-800">
             <a href="/logout" class="flex items-center space-x-3 text-red-400 hover:text-red-300 p-3">

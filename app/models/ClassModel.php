@@ -25,4 +25,12 @@ class ClassModel
         $stmt->execute([$teacherId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getByTeacherId($teacherId)
+    {
+        $sql = "SELECT * FROM classes WHERE teacher_id = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$teacherId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
