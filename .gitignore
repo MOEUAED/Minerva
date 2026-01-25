@@ -2,5 +2,5 @@ config/database.php
 config/.env
 vendor/
 *.session.sql
-
-
+config/email.php
+minerve.session.sql
