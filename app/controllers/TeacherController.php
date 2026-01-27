@@ -19,7 +19,8 @@ class TeacherController
         }
         $teacherId = $_SESSION['userId'];
         $classes = $this->afficheprojet->getClassesByTeacher($teacherId);
-    
+        $classe = $this->afficheprojet->getClassesByTeacherId($teacherId);
+
         require_once __DIR__ . '/../../views/teacher/dashboard.php';
     }
     public function storeStudent()
