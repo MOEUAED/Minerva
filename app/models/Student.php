@@ -38,4 +38,19 @@ class StudentModel
         $stmt = $this->db->query("SELECT * FROM users WHERE role = 'student'");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getByClass($classId)
+    {
+        $sql = "
+            SELECT users.id, users.fullname, users.email
+            FROM class_students
+            JOIN users ON users.id = class_students.student_id
+            WHERE class_students.class_id = ?
+        ";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$classId]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

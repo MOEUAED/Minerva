@@ -1,4 +1,16 @@
 {
+    "name": "ziyan/minerva",
+    "autoload": {
+        "psr-4": {
+            "Ziyan\\Minerva\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "MOEUAED",
+            "email": "ziyanimouad@gmail.com"
+        }
+    ],
     "require": {
         "phpmailer/phpmailer": "^7.0"
     }
